@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Vuejs demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div id="todo-app" class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Vuedo - <span class="badge badge-primary">{{ unfinishedTodos }} todo{{ unfinishedTodos !== 1 ? 's' : '' }} left</span></h1>
+    </div>
+  </div>
+
+  <div class="row top-space">
+    <div class="col-8 col-md-10">
+      <input class="form-control" placeholder="Todo..." ref="todoInput" v-model="todoText" @keydown.enter="addTodo">
+    </div>
+    <div class="col-4 col-md-2">
+      <button class="btn btn-success w-100" v-on:click="addTodo" v-bind:disabled="!canPostTodo">Add todo</button>
+    </div>
+  </div>
+
+  <div class="row top-space">
+    <div class="col-12">
+      <div class="alert alert-primary" v-if="!todos.length">No todos!</div>
+      <ul class="list-group todo-list">
+        <li v-for="(todo, idx) in todos"
+            v-bind:class="{completed: todo.completed}"
+            class="list-group-item">
+          <div class="row">
+            <div class="col-8 col-md-10">
+              <div class="row">
+                <div class="col-3 col-md-1 complete-toggle-container">
+                  <input class="d-none" type="checkbox" v-bind:id="'complete-toggle-' + idx" v-model="todo.completed">
+                  <label v-bind:for="'complete-toggle-' + idx"></label>
+                </div>
+
+                <div class="col-9 col-md-11" v-on:dblclick="editTodo(idx)">
+                  <input class="w-100"
+                         v-if="editing === idx"
+                         v-model="todo.text"
+                         v-focus="editing === idx"
+                         @keyup.enter="doneEdit(idx)"
+                         @blur="doneEdit(idx)"
+                         @keyup.esc="cancelEdit(idx)">
+                  <span v-else>{{ todo.text }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4 col-md-2 remove-button-container">
+              <button class="btn btn-sm btn-danger ml-auto"
+                @click="removeTodo(idx)">Remove</button>
+            </div>
+          </div>
+        </li>
+        </ul>
+    </div>
+  </div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js'></script>
+  <script src="js/index.js"></script>
+
+</body>
+
+</html>

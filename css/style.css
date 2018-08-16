@@ -1,0 +1,64 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+.top-space {
+  margin-top: 1.5rem;
+}
+
+.completed {
+  background: #ccff90;
+}
+
+.completed-progress-bar {
+  border: 1px solid #000;
+  height: 2rem;
+}
+
+.completed-progress-bar > div {
+  background: #f00;
+  height: 100%;
+}
+
+li span {
+  vertical-align: middle;
+}
+
+input[type=checkbox] + label {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  margin: 0;
+  border: 2px solid #0069d9;
+  vertical-align: middle;
+}
+
+input[type=checkbox] + label::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+}
+
+input[type=checkbox]:checked + label {
+  background: #fff;
+}
+
+input[type=checkbox]:checked + label::after {
+  background: #007bff;
+}
+
+.remove-button-container,
+.complete-toggle-container {
+  display: flex;
+  align-items: center;
+}
